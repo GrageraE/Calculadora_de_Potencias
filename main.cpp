@@ -29,6 +29,10 @@ void fraccion_div();
 
 void semisuma();
 void potencia();
+void r_cua();
+void r_cub();
+void inv();
+void base_10();
 void cr_archivo();
 void salida();
 
@@ -43,7 +47,11 @@ int main()
     cout <<" 4.Dividir fracciones" <<endl;
     cout <<" 5.Hacer semisuma" <<endl;
     cout <<" 6.Hacer potencia" <<endl;
-    cout <<" 7.Salir" <<endl;
+    cout <<" 7.Hacer raiz cuadrada " <<endl;
+    cout <<" 8.Hacer raiz cubica" <<endl;
+    cout <<" 9.Hacer fraccion inversa" <<endl;
+    cout <<" 10.Calcular potencia con base 10" <<endl;
+    cout <<" 11.Salir" <<endl;
     cout <<" ===> ";
     cin >> op;
 
@@ -74,6 +82,22 @@ int main()
         }
         break;
         case 7:{
+            r_cua();
+        }
+        break;
+        case 8:{
+            r_cub();
+        }
+        break;
+        case 9:{
+            inv();
+        }
+        break;
+        case 10:{
+            base_10();
+        }
+        break;
+        case 11:{
             salida();
         }
         break;
@@ -270,6 +294,54 @@ void fraccion_resta()
 }
 
 
+void r_cua()
+{
+    cout <<" Cual es el numero?" <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+    result = sqrt(n1);
+
+    cout <<" El resultado es " <<result <<endl;
+}
+
+
+void r_cub()
+{
+    cout <<" Cual es el numero?" <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+    result = cbrt(n1);
+
+    cout <<" El resultado es " <<result <<endl;
+}
+
+
+void base_10()
+{
+    cout <<" Cual sera el exponente de la operacion?" <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+    result = pow(10, n1);
+
+    cout <<" El resultado es " <<result <<endl;
+}
+
+
+void inv()
+{
+    cout <<" Cual es el numero?" <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+    result = 1/n1;
+
+    cout <<" El resultado es " <<result <<endl;
+}
+
+
 void cr_archivo()
 {
     string nm = "";
@@ -278,6 +350,7 @@ void cr_archivo()
     cout <<" Se le anadira '.txt' al final" <<endl;
     cout <<" ===> ";
     cin >> nm;
+    nm = nm + ".txt";
 
     ofstream archivo;
     archivo.open(nm, ios::out);
@@ -321,6 +394,24 @@ void cr_archivo()
         }
         break;
         case 7:{
+            archivo <<" Primer numero ===> " <<n1 <<endl;
+            archivo <<" Resultado ===> " <<result <<endl;
+        }
+        break;
+        case 8:{
+            archivo <<" Primer numero ===> " <<n1 <<endl;
+            archivo <<" Resultado ===> " <<result <<endl;
+        }
+        break;
+        case 9:{
+            archivo <<" Denominador ===> " <<n1 <<endl;
+            archivo <<" Resultado ===> " <<result <<endl;
+        }
+        case 10:{
+            archivo <<" Exponente ===> " <<n1 <<endl;
+            archivo <<" Resultado ===> " <<result <<endl;
+        }
+        case 11:{
             exit(1);
         }
         break;
