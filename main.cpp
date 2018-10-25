@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <fstream>
 #include <cmath>
+#include <algorithm>
 using namespace std;
 
 float fr1 = 0;
@@ -15,6 +16,8 @@ float fr6 = 0;
 float n1 = 0;
 float n2 = 0;
 float result = 0;
+
+int factorial = 1;
 
 int op = 0;  
 
@@ -33,6 +36,11 @@ void r_cua();
 void r_cub();
 void inv();
 void base_10();
+void fact();
+void pi_por();
+void e_por();
+void pi_el();
+void e_el();
 void cr_archivo();
 void salida();
 
@@ -51,7 +59,12 @@ int main()
     cout <<" 8.Hacer raiz cubica" <<endl;
     cout <<" 9.Hacer fraccion inversa" <<endl;
     cout <<" 10.Calcular potencia con base 10" <<endl;
-    cout <<" 11.Salir" <<endl;
+    cout <<" 11.Factorial de un numero" <<endl;
+    cout <<" 12.Multiplicar Pi por ... " <<endl;
+    cout <<" 13.Multiplicar e por ... " <<endl;
+    cout <<" 14.Elevar Pi a ... " <<endl;
+    cout <<" 15.Elevar e a ... " <<endl;
+    cout <<" 16.Salir" <<endl;
     cout <<" ===> ";
     cin >> op;
 
@@ -98,6 +111,26 @@ int main()
         }
         break;
         case 11:{
+            fact();
+        }
+        break;
+        case 12:{
+            pi_por();
+        }
+        break;
+        case 13:{
+            e_por();
+        }
+        break;
+        case 14:{
+            pi_el();
+        }
+        break;
+        case 15:{
+            e_el();
+        }
+        break;
+        case 16:{
             salida();
         }
         break;
@@ -342,6 +375,65 @@ void inv()
 }
 
 
+void fact()
+{
+    //int factorial = 1;
+
+    cout <<" Cual es el numero?" <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+
+    for(int i = 1; i <= n1; i++)
+    {
+        factorial = factorial*i;
+    }
+    cout <<" El factorial es " <<factorial <<endl;
+}
+
+
+void pi_por()
+{
+    cout <<" Escriba el numero para multiplicar" <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+    result = 3.14*n1;
+    cout <<" El resultado es " <<result <<endl;
+}
+
+
+void e_por()
+{
+    cout <<" Escriba el numero para multiplicar" <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+    result = 2.71*n1;
+    cout <<" El resultado es " <<result <<endl;
+}
+
+
+void pi_el()
+{
+    cout <<" Escriba el exponente para elevar" <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+    result = pow(3.14, n1);
+    cout <<" El resultado es " <<result <<endl;
+}
+
+void e_el()
+{
+    cout <<" Escriba el numero para elevar" <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+    result = pow(2.71, n1);
+    cout <<" El resultado es " <<result <<endl;
+}
+
 void cr_archivo()
 {
     string nm = "";
@@ -407,11 +499,37 @@ void cr_archivo()
             archivo <<" Denominador ===> " <<n1 <<endl;
             archivo <<" Resultado ===> " <<result <<endl;
         }
+        break;
         case 10:{
             archivo <<" Exponente ===> " <<n1 <<endl;
             archivo <<" Resultado ===> " <<result <<endl;
         }
+        break;
         case 11:{
+            archivo <<" Numero ===> " <<n1 <<endl;
+            archivo <<" Resultado ===> " <<factorial <<endl;
+        }
+        break;
+        case 12:{
+            archivo <<" Numero ===> " <<n1 <<endl;
+            archivo <<" Resultado ===> " <<result <<endl;
+        }
+        break;
+        case 13:{
+            archivo <<" Numero ===> " <<n1 <<endl;
+            archivo <<" Resultado ===> " <<result <<endl;
+        }
+        break;
+        case 14:{
+            archivo <<" Exponente ===> " <<n1 <<endl;
+            archivo <<" Resultado ===> " <<result <<endl;
+        }
+        break;
+        case 15:{
+            archivo <<" Exponente ===> " <<n1 <<endl;
+            archivo <<" Resultado ===> " <<result <<endl;
+        }
+        case 16:{
             exit(1);
         }
         break;
