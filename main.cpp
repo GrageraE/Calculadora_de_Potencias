@@ -17,6 +17,11 @@ float n1 = 0;
 float n2 = 0;
 float result = 0;
 
+int base1 = 0;
+int exp1 = 0;
+int base2 = 0;
+int exp11 = 0;
+
 int factorial = 1;
 
 int op = 0;  
@@ -29,6 +34,15 @@ void fraccion_suma();
 void fraccion_resta();
 void fraccion_mul();
 void fraccion_div();
+
+
+void op_potencia();
+
+void mul_pot();
+void div_pot();
+void mul_pot_dis();
+void div_pot_dis();
+
 
 void semisuma();
 void potencia();
@@ -64,7 +78,9 @@ int main()
     cout <<" 13.Multiplicar e por ... " <<endl;
     cout <<" 14.Elevar Pi a ... " <<endl;
     cout <<" 15.Elevar e a ... " <<endl;
-    cout <<" 16.Salir" <<endl;
+    cout <<" 16.Multiplicar potencias " <<endl;
+    cout <<" 17.Dividir potencias " <<endl;
+    cout <<" 18.Salir" <<endl;
     cout <<" ===> ";
     cin >> op;
 
@@ -131,6 +147,14 @@ int main()
         }
         break;
         case 16:{
+            op_potencia();
+        }
+        break;
+        case 17:{
+            op_potencia();
+        }
+        break;
+        case 18:{
             salida();
         }
         break;
@@ -434,6 +458,85 @@ void e_el()
     cout <<" El resultado es " <<result <<endl;
 }
 
+
+void op_potencia()
+{
+    cout <<" Di la primera base" <<endl;
+    cout <<" ===> ";
+    cin >> base1;
+
+    cout <<" Di el primer exponente de dicha potencia" <<endl;
+    cout <<" ===> ";
+    cin >> exp1;
+
+    cout <<" Di la base de la segunda potencia" <<endl;
+    cout <<" ===> ";
+    cin >> base2;
+
+    cout <<" Di el exponente de dicha potencia " <<endl;
+    cout <<" ===> ";
+    cin >> exp11;
+
+    //This not work
+    /*if(base1 != base2, exp1 != exp11)
+    {
+        cout <<" De momento no se pueden hacer operaciones con distintas bases y exponentes" <<endl;
+        system("PAUSE");
+        exit(1);
+    }
+    */
+
+    switch(op)
+    {
+        case 16:{
+            if (exp1 == exp11)
+            {
+                mul_pot();
+            }
+            if(base1==base2)
+            {
+                mul_pot_dis();
+            }
+        }
+        break;
+        case 17:{
+            if(exp1 == exp11)
+            {
+                div_pot();
+            }
+            if(base1==base2)
+            {
+                div_pot_dis();
+            }
+        }
+    }
+}
+
+
+void mul_pot()
+{
+    result = base1*base2;
+    cout <<" El resultado es " <<result <<" elevado a " <<exp1 <<endl;
+}
+
+void div_pot()
+{
+    result = base1/base2;
+    cout <<" El resultado es " <<result <<" elevado a " <<exp1 <<endl;
+}
+
+void mul_pot_dis()
+{
+    result = exp1+exp11;
+    cout <<" El resultado es " <<base1 <<" elevado a " <<result <<endl;
+}
+
+void div_pot_dis()
+{
+    result = exp1-exp11;
+    cout <<" El resultado es " <<base1 <<" elevado a " <<result <<endl;
+}
+
 void cr_archivo()
 {
     string nm = "";
@@ -529,7 +632,26 @@ void cr_archivo()
             archivo <<" Exponente ===> " <<n1 <<endl;
             archivo <<" Resultado ===> " <<result <<endl;
         }
-        case 16:{
+        break;
+        case 16:
+        case 17:{
+            archivo <<" Base 1 ===> " <<base1 <<endl;
+            archivo <<" Exponente 1 ===> " <<exp1 <<endl;
+            archivo <<" Base 2 ===> " <<base2 <<endl;
+            archivo <<" Exponente 2 ===> " <<exp11 <<endl;
+            //Here is an other bug
+            /*if(exp1 == exp11)
+            {
+                archivo <<" Resultado: " <<result <<" elevado a " <<exp1 <<endl;
+            }
+            if(base1==base2)
+            {
+                archivo <<" Resultado: " <<base1 <<" elevado a " <<result <<endl;
+            }
+            */
+        }
+        break;
+        case 18:{
             exit(1);
         }
         break;
