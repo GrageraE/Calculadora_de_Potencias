@@ -4,6 +4,8 @@
 #include <fstream>
 #include <cmath>
 #include <algorithm>
+#include <wchar.h>
+#include <locale>
 using namespace std;
 
 float fr1 = 0;
@@ -21,10 +23,12 @@ int base1 = 0;
 int exp1 = 0;
 int base2 = 0;
 int exp11 = 0;
+int exp111 = 0;
 
 int factorial = 1;
 
 int op = 0;  
+int op_pot = 0;
 
 string op2 = "";
 
@@ -43,6 +47,10 @@ void div_pot();
 void mul_pot_dis();
 void div_pot_dis();
 
+void potencia_potencia();
+void potencia_potencia_2();
+void potencia_potencia_3();
+
 
 void semisuma();
 void potencia();
@@ -57,6 +65,7 @@ void pi_el();
 void e_el();
 void cr_archivo();
 void salida();
+void changelog();
 
 int main()
 {
@@ -80,7 +89,9 @@ int main()
     cout <<" 15.Elevar e a ... " <<endl;
     cout <<" 16.Multiplicar potencias " <<endl;
     cout <<" 17.Dividir potencias " <<endl;
-    cout <<" 18.Salir" <<endl;
+    cout <<" 18.Potencia de una potencia" <<endl;
+    cout <<" 19.Ver lista de cambios " <<endl;
+    cout <<" 20.Salir" <<endl;
     cout <<" ===> ";
     cin >> op;
 
@@ -155,6 +166,14 @@ int main()
         }
         break;
         case 18:{
+            potencia_potencia();
+        }
+        break;
+        case 19:{
+            changelog();
+        }
+        break;
+        case 20:{
             salida();
         }
         break;
@@ -537,6 +556,74 @@ void div_pot_dis()
     cout <<" El resultado es " <<base1 <<" elevado a " <<result <<endl;
 }
 
+
+void potencia_potencia()
+{
+    //int op_pot = 0;
+
+    cout <<" De cuantos exponentes vamos a multiplicar?" <<endl;
+    cout <<" 1.- 2 Exponentes" <<endl;
+    cout <<" 2.- 3 Exponentes" <<endl;
+    cout <<" ===> ";
+    cin >> op_pot;
+    switch(op_pot)
+    {
+        case 1:{
+            potencia_potencia_2();
+        }
+        break;
+        case 2:{
+            potencia_potencia_3();
+        }
+        break;
+        default:{
+            cout <<" Opcion incorrecta" <<endl;
+            system("PAUSE");
+            exit(1);
+        }
+    }
+}
+
+void potencia_potencia_2()
+{
+    cout <<" Cual es la base?" <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+    cout <<" Cual es el primer exponente?" <<endl;
+    cout <<" ===> ";
+    cin >> exp1;
+
+    cout <<" Cual es el segundo exponente?" <<endl;
+    cout <<" ===> ";
+    cin >> exp11;
+
+    result = exp1*exp11;
+    cout <<" El resultado es " <<n1 <<" elevado a " <<result <<endl;
+}
+
+void potencia_potencia_3()
+{
+    cout <<" Cual es la base?" <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+    cout <<" Cual es el primer exponente?" <<endl;
+    cout <<" ===> ";
+    cin >> exp1;
+
+    cout <<" Cual es el segundo exponente?" <<endl;
+    cout <<" ===> ";
+    cin >> exp11;
+
+    cout <<" Cual es el tercer exponente?" <<endl;
+    cout <<" ===> ";
+    cin >> exp111;
+
+    result = exp1*exp11*exp111;
+    cout <<" El resultado es " <<n1 <<" elevado a " <<result <<endl;
+}
+
 void cr_archivo()
 {
     string nm = "";
@@ -651,6 +738,17 @@ void cr_archivo()
         }
         break;
         case 18:{
+            archivo <<" Base: " <<n1 <<endl;
+            archivo <<" Exponente 1: " <<exp1 <<endl;
+            archivo <<" Expoente 2: " <<exp11 <<endl;
+            if(op_pot = 2)
+            {
+                archivo <<" Exponente 3: " <<exp111 <<endl;
+            }
+            archivo <<" Resultado: " <<n1 <<" elevado a " <<result <<endl;
+        }
+        break;
+        case 19:{
             exit(1);
         }
         break;
@@ -668,4 +766,28 @@ void cr_archivo()
     archivo.close();
     cout <<" Archivo creado correctamente" <<endl;
     system("PAUSE");
+}
+
+
+void changelog()
+{
+    setlocale(LC_ALL, "");
+    ifstream lista;
+    lista.open("changelog.txt", ios::in);
+    if(lista.fail())
+    {
+        cout <<" No se encuentra el changelog.txt. Descargalo de GitHub" <<endl;
+        system("PAUSE");
+        exit(1);
+    }
+    while(!lista.eof())
+    {
+        string texto;
+        getline(lista, texto);
+        cout <<texto <<endl;
+    }
+    lista.close();
+    cout <<endl;
+    system("PAUSE");
+    salida();
 }
