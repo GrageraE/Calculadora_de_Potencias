@@ -640,15 +640,14 @@ void cr_archivo()
             archivo <<" Base 2 ===> " <<base2 <<endl;
             archivo <<" Exponente 2 ===> " <<exp11 <<endl;
             //Here is an other bug
-            /*if(exp1 == exp11)
+            if(base1 != base2)
             {
                 archivo <<" Resultado: " <<result <<" elevado a " <<exp1 <<endl;
             }
-            if(base1==base2)
+            if(exp1 != exp11)
             {
                 archivo <<" Resultado: " <<base1 <<" elevado a " <<result <<endl;
             }
-            */
         }
         break;
         case 18:{
