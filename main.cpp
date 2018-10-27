@@ -29,6 +29,7 @@ int factorial = 1;
 
 int op = 0;  
 int op_pot = 0;
+int op_11 = 0;
 
 string op2 = "";
 
@@ -496,18 +497,46 @@ void op_potencia()
     cout <<" ===> ";
     cin >> exp11;
 
-    //This not work
-    /*if(base1 != base2, exp1 != exp11)
+    if(base1 != base2 && exp1 != exp11)
     {
         cout <<" De momento no se pueden hacer operaciones con distintas bases y exponentes" <<endl;
         system("PAUSE");
         exit(1);
     }
-    */
+    
 
     switch(op)
     {
         case 16:{
+            if(exp1 == exp11 && base1 == base2)
+            {
+                int op_11 = 0;
+                cout <<" Se han detectado que todos los campos son iguales?" <<endl;
+                cout <<" Como desea calcular la poetncia?" <<endl;
+                cout <<" 1.Sumando exponentes " <<endl;
+                cout <<" 2.Multiplicando bases " <<endl;
+                cout <<" ===> ";
+                cin >> op_11;
+                switch(op_11)
+                {
+                    case 1:{
+                        mul_pot_dis();
+                        return;
+                    }
+                    break;
+                    case 2:{
+                        mul_pot();
+                        return;
+                    }
+                    break;
+                    default:{
+                        cout <<" Opcion incorrecta" <<endl;
+                        system("PAUSE");
+                        exit(1);
+                    }
+                }
+            }
+
             if (exp1 == exp11)
             {
                 mul_pot();
@@ -519,6 +548,36 @@ void op_potencia()
         }
         break;
         case 17:{
+
+            if(exp1 == exp11 && base1 == base2)
+            {
+                //int op_11 = 0;
+                cout <<" Se han detectado que todos los campos son iguales?" <<endl;
+                cout <<" Como desea calcular la poetncia?" <<endl;
+                cout <<" 1.Restando exponentes " <<endl;
+                cout <<" 2.Dividiendo bases " <<endl;
+                cout <<" ===> ";
+                cin >> op_11;
+                switch(op_11)
+                {
+                    case 1:{
+                        div_pot_dis();
+                        return;
+                    }
+                    break;
+                    case 2:{
+                        div_pot();
+                        return;
+                    }
+                    break;
+                    default:{
+                        cout <<" Opcion incorrecta" <<endl;
+                        system("PAUSE");
+                        exit(1);
+                    }
+                }
+            }
+
             if(exp1 == exp11)
             {
                 div_pot();
@@ -727,6 +786,17 @@ void cr_archivo()
             archivo <<" Base 2 ===> " <<base2 <<endl;
             archivo <<" Exponente 2 ===> " <<exp11 <<endl;
             //Here is an other bug
+            if(op_11 > 0)
+            {
+                if(op_11 == 1)
+                {
+                    archivo <<" Resultado: " <<base1 <<" elevado a " <<result <<endl;
+                }
+                if(op_11 == 2)
+                {
+                    archivo <<" Resultado: " <<result <<" elevado a " <<exp1 <<endl;
+                }
+            }
             if(base1 != base2)
             {
                 archivo <<" Resultado: " <<result <<" elevado a " <<exp1 <<endl;
