@@ -32,6 +32,7 @@ int op_pot = 0;
 int op_11 = 0;
 
 string op2 = "";
+string op_rep = "";
 
 void fraccion();
 
@@ -71,7 +72,9 @@ void changelog();
 int main()
 {
     //int op = 0;
+    setlocale(LC_ALL, "");
 
+    do{
     cout <<" Que desea hacer?" <<endl;
     cout <<" 1.Sumar fracciones" <<endl;
     cout <<" 2.Restar fracciones" <<endl;
@@ -190,6 +193,16 @@ int main()
     {
         cr_archivo();
     }
+
+    cout <<" Quiere hacer otra operacion mas? (S/n) ";
+    cin >> op_rep; 
+    if(op_rep == "s" || op_rep == "S")
+    {
+        cout <<endl;
+    }
+    }
+    while (op_rep == "s" || op_rep == "S");
+
     system("PAUSE");
     return 0;
 }
@@ -552,7 +565,7 @@ void op_potencia()
             if(exp1 == exp11 && base1 == base2)
             {
                 //int op_11 = 0;
-                cout <<" Se han detectado que todos los campos son iguales?" <<endl;
+                cout <<" Se han detectado que todos los campos son iguales" <<endl;
                 cout <<" Como desea calcular la poetncia?" <<endl;
                 cout <<" 1.Restando exponentes " <<endl;
                 cout <<" 2.Dividiendo bases " <<endl;
@@ -589,7 +602,6 @@ void op_potencia()
         }
     }
 }
-
 
 void mul_pot()
 {
@@ -786,17 +798,15 @@ void cr_archivo()
             archivo <<" Base 2 ===> " <<base2 <<endl;
             archivo <<" Exponente 2 ===> " <<exp11 <<endl;
             //Here is an other bug
-            if(op_11 > 0)
+            /*if(op_11 == 1)
             {
-                if(op_11 == 1)
-                {
-                    archivo <<" Resultado: " <<base1 <<" elevado a " <<result <<endl;
-                }
-                if(op_11 == 2)
-                {
-                    archivo <<" Resultado: " <<result <<" elevado a " <<exp1 <<endl;
-                }
+                archivo <<" Resultado: " <<base1 <<" elevado a " <<result <<endl;
             }
+            if(op_11 == 2)
+            {
+                archivo <<" Resultado: " <<result <<" elevado a " <<exp1 <<endl;
+            }
+            */
             if(base1 != base2)
             {
                 archivo <<" Resultado: " <<result <<" elevado a " <<exp1 <<endl;
@@ -846,7 +856,7 @@ void changelog()
     lista.open("changelog.txt", ios::in);
     if(lista.fail())
     {
-        cout <<" No se encuentra el changelog.txt. Descargalo de GitHub" <<endl;
+        cout <<" No se encuentra el changelog.txt. Debes de descargarlo de GitHub " <<endl;
         system("PAUSE");
         exit(1);
     }
