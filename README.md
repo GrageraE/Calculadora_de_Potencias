@@ -4,4 +4,4 @@
 
 ## How to Build
 
-Simplemente usar iostream, fstream, stdlib.h, cmath, string y algorithm con g++/gcc para compilar.
+Simplemente usar iostream, fstream, stdlib.h, cmath, string, algorithm, wchar.h y locale/locale.h con g++/gcc para compilar.
