@@ -17,7 +17,9 @@ float fr6 = 0;
 
 float n1 = 0;
 float n2 = 0;
+float n3 = 0;
 float result = 0;
+float result2 = 0;
 
 int base1 = 0;
 int exp1 = 0;
@@ -30,9 +32,12 @@ int factorial = 1;
 int op = 0;  
 int op_pot = 0;
 int op_11 = 0;
+int op_sen1 = 0;
+int op_sen2 = 0;
 
 string op2 = "";
 string op_rep = "";
+string op_pot2 = "";
 
 void fraccion();
 
@@ -52,6 +57,17 @@ void div_pot_dis();
 void potencia_potencia();
 void potencia_potencia_2();
 void potencia_potencia_3();
+void potencia_potencia_result();
+
+void op_sen();
+
+void sumar();
+void restar();
+void mul();
+void div();
+void sumar3();
+void restar3();
+void mul3();
 
 
 void semisuma();
@@ -94,8 +110,9 @@ int main()
     cout <<" 16.Multiplicar potencias " <<endl;
     cout <<" 17.Dividir potencias " <<endl;
     cout <<" 18.Potencia de una potencia" <<endl;
-    cout <<" 19.Ver lista de cambios " <<endl;
-    cout <<" 20.Salir" <<endl;
+    cout <<" 19.Operaciones mas sencillas" <<endl;
+    cout <<" 20.Ver lista de cambios " <<endl;
+    cout <<" 21.Salir" <<endl;
     cout <<" ===> ";
     cin >> op;
 
@@ -174,16 +191,31 @@ int main()
         }
         break;
         case 19:{
-            changelog();
+            op_sen();
         }
         break;
         case 20:{
+            changelog();
+        }
+        break;
+        case 21:{
             salida();
         }
         break;
         default:{
             cout <<" Opcion incorrecta" <<endl;
             system("PAUSE");
+        }
+    }
+
+    if(op == 18)
+    {
+        cout <<" Quiere saber el resultado? (S/n) " <<endl;
+        cout <<" ===> ";
+        cin >> op_pot2;
+        if(op_pot2 == "s" || op_pot2 == "S")
+        {
+            potencia_potencia_result();
         }
     }
 
@@ -211,6 +243,181 @@ void salida()
 {
     cout <<" Saliendo ... " <<endl;
     exit(0);
+}
+
+void op_sen()
+{
+    cout <<" Que operacion desea hacer?" <<endl;
+    cout <<" 1.Sumar " <<endl;
+    cout <<" 2.Restar" <<endl;
+    cout <<" 3.Multiplicar " <<endl;
+    cout <<" 4.Dividir" <<endl;
+    cout <<" ===> ";
+    cin >> op_sen1;
+    
+    if(op_sen1 == 4)
+    {
+        div();
+        return;
+    }
+    cout <<" De cuantos factores seran?" <<endl;
+    cout <<" 1.De dos factores" <<endl;
+    cout <<" 2.De tres factores" <<endl;
+    cout <<" ===> ";
+    cin >> op_sen2;
+
+    if(op_sen2 > 2)
+    {
+        cout <<" Opcion incorrecta" <<endl;
+        system("PAUSE");
+        exit(1);
+    }
+
+    switch(op_sen1)
+    {
+        case 1:{
+            if(op_sen2 == 1)
+            {
+                sumar();
+            }
+            else{
+                sumar3();
+            }
+        }
+        break;
+        case 2:{
+            if(op_sen2 == 1)
+            {
+                restar();
+            }
+            else{
+                restar3();
+            }
+        }
+        break;
+        case 3:{
+            if(op_sen2 == 1)
+            {
+                mul();
+            }
+            else{
+                mul3();
+            }
+        }
+        break;
+        default:{
+            cout <<" Opcion incorrecta" <<endl;
+            system("PAUSE");
+            exit(1);
+        }
+    }
+}   
+
+void sumar()
+{
+    cout <<" Cual es el primer numero?" <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+    cout <<" Cual es el segundo numero?" <<endl;
+    cout <<" ===> ";
+    cin >> n2;
+
+    result = n1+n2;
+    cout <<" El resultado es " <<result <<endl;
+}
+void sumar3()
+{
+    cout <<" Cual es el primer numero?" <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+    cout <<" Cual es el segundo numero?" <<endl;
+    cout <<" ===> ";
+    cin >> n2;
+
+    cout <<" Cual es el tercer numero?" <<endl;
+    cout <<" ===> ";
+    cin >> n3;
+
+    result = n1+n2+n3;
+    cout <<" El resultado es " <<result <<endl;
+}
+
+void restar()
+{
+    cout <<" Cual es el primer numero?" <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+    cout <<" Cual es el segundo numero?" <<endl;
+    cout <<" ===> ";
+    cin >> n2;
+
+    result = n1-n2;
+    cout <<" El resultado es " <<result <<endl;
+}
+void restar3()
+{
+    cout <<" Cual es el primer numero?" <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+    cout <<" Cual es el segundo numero?" <<endl;
+    cout <<" ===> ";
+    cin >> n2;
+
+    cout <<" Cual es el tercer numero?" <<endl;
+    cout <<" ===> ";
+    cin >> n3;
+
+    result = n1-n2-n3;
+    cout <<" El resultado es " <<result <<endl;
+}
+
+void mul()
+{
+    cout <<" Cual es el primer numero?" <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+    cout <<" Cual es el segundo numero?" <<endl;
+    cout <<" ===> ";
+    cin >> n2;
+    
+    result = n1*n2;
+    cout <<" El resultado es " <<result <<endl;
+}
+void mul3()
+{
+    cout <<" Cual es el primer numero?" <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+    cout <<" Cual es el segundo numero?" <<endl;
+    cout <<" ===> ";
+    cin >> n2;
+
+    cout <<" Cual es el tercer numero?" <<endl;
+    cout <<" ===> ";
+    cin >> n3;
+
+    result = n1*n2*n3;
+    cout <<" El resultado es " <<result <<endl;
+}
+
+void div()
+{
+    cout <<" Cual es el primer numero?" <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+    cout <<" Cual es el segundo numero?" <<endl;
+    cout <<" ===> ";
+    cin >> n2;
+
+    result = n1/n2;
+    cout <<" El resultado es " <<result <<endl;
 }
 
 void fraccion()
@@ -694,6 +901,11 @@ void potencia_potencia_3()
     result = exp1*exp11*exp111;
     cout <<" El resultado es " <<n1 <<" elevado a " <<result <<endl;
 }
+void potencia_potencia_result()
+{
+    result2 = pow(n1, result);
+    cout <<" El resultado es " <<result2 <<endl;
+}
 
 void cr_archivo()
 {
@@ -826,9 +1038,38 @@ void cr_archivo()
                 archivo <<" Exponente 3: " <<exp111 <<endl;
             }
             archivo <<" Resultado: " <<n1 <<" elevado a " <<result <<endl;
+            if(op_pot2 == "s" || op_pot2 == "S")
+            {
+                archivo <<endl;
+                archivo <<" El resultado de esta potencia es " <<result2 <<endl;
+            }
         }
         break;
         case 19:{
+            if(op_sen1 == 4)
+            {
+                archivo <<" Numero 1: " <<n1 <<endl;
+                archivo <<" Numero 2: " <<n2 <<endl;
+                archivo <<" Resultado: " <<result <<endl; 
+            }
+            switch(op_sen2)
+            {
+                case 1:{
+                    archivo <<" Numero 1: " <<n1 <<endl;
+                    archivo <<" Numero 2: " <<n2 <<endl;
+                    archivo <<" Resultado: " <<result <<endl;
+                }
+                break;
+                case 2:{
+                    archivo <<" Numero 1: " <<n1 <<endl;
+                    archivo <<" Numero 2: " <<n2 <<endl;
+                    archivo <<" Numero 3: " <<n3 <<endl;
+                    archivo <<" Resultado: " <<result <<endl;
+                }
+            }
+        }
+        break;
+        case 20:{
             exit(1);
         }
         break;
