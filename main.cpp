@@ -38,6 +38,7 @@ int op_sen2 = 0;
 string op2 = "";
 string op_rep = "";
 string op_pot2 = "";
+string op_porcen = "";
 
 void fraccion();
 
@@ -68,6 +69,9 @@ void div();
 void sumar3();
 void restar3();
 void mul3();
+void porcen();
+void porcen2();
+void iva();
 
 
 void semisuma();
@@ -252,12 +256,31 @@ void op_sen()
     cout <<" 2.Restar" <<endl;
     cout <<" 3.Multiplicar " <<endl;
     cout <<" 4.Dividir" <<endl;
+    cout <<" 5.Calcular un porcentaje" <<endl;
+    cout <<" 6.Calcular el porcentaje de una fraccion" <<endl;
+    cout <<" 7.Calcular el IVA (21 por ciento)" <<endl;
     cout <<" ===> ";
     cin >> op_sen1;
     
     if(op_sen1 == 4)
     {
         div();
+        return;
+    }
+
+    if(op_sen1 == 5)
+    {
+        porcen();
+        return;
+    }
+    if(op_sen1 == 6)
+    {
+        porcen2();
+        return;
+    }
+    if(op_sen1 == 7)
+    {
+        iva();
         return;
     }
     cout <<" De cuantos factores seran?" <<endl;
@@ -417,6 +440,56 @@ void div()
     cin >> n2;
 
     result = n1/n2;
+    cout <<" El resultado es " <<result <<endl;
+}
+
+void porcen()
+{
+    cout <<" Cual es el numero del cual se debe coger su porcentaje?" <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+    cout <<" Cual es el porcentaje?" <<endl;
+    cout <<" ===> ";
+    cin >> n2;
+
+    result = (n1*n2)/100;
+    cout <<" El " <<n2 <<" por ciento de " <<n1 <<" es " <<result <<endl;
+}
+void porcen2()
+{
+    cout <<" Cual es el numero base?" <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+    cout <<" Cual es el otro numero?" <<endl;
+    cout <<" ===> ";
+    cin >> n2;
+    if(n2 > n1)
+    {
+        cout <<" El segundo numero es mas grande que el primero." <<endl;
+        cout <<" Por lo que el porciento sera mas alto que 100. Seguro que quieres continuar? (S/n) ";
+        cin >> op_porcen;
+        if(op_porcen == "n")
+        {
+            cout <<" La app se cerrara" <<endl;
+            system("PAUSE");
+            exit(0);
+        }
+    }
+
+    result = (n2*100)/n1;
+    cout <<" El resultado es el " <<result <<" por ciento de " <<n1 <<endl;
+}
+
+void iva()
+{
+    cout <<" Cual es el precio? (en euros) " <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+    result = (n1*21)/100;
+    result = n1-result;
     cout <<" El resultado es " <<result <<endl;
 }
 
@@ -1051,6 +1124,23 @@ void cr_archivo()
                 archivo <<" Numero 1: " <<n1 <<endl;
                 archivo <<" Numero 2: " <<n2 <<endl;
                 archivo <<" Resultado: " <<result <<endl; 
+            }
+            if(op_sen1 == 5)
+            {
+                archivo <<" Base: " <<n1 <<endl;
+                archivo <<" Porcentaje: " <<n2 <<" por ciento " <<endl;
+                archivo <<" Resultado: " <<result <<endl;
+            }
+            if(op_sen1 == 6)
+            {
+                archivo <<" Base: " <<n1 <<endl;
+                archivo <<" Porcentaje (resultado): " <<result <<" por ciento " <<endl;
+                archivo <<" 'Otro' numero: " <<n2 <<endl;
+            }
+            if(op_sen1 == 7)
+            {
+                archivo <<" Precio con IVA: " <<n1 <<endl;
+                archivo <<" Precio sin IVA: " <<result <<endl;
             }
             switch(op_sen2)
             {
