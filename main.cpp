@@ -20,6 +20,8 @@ float n2 = 0;
 float n3 = 0;
 float result = 0;
 float result2 = 0;
+int m1 = 0;
+int m2 = 0;
 
 int base1 = 0;
 int exp1 = 0;
@@ -72,6 +74,10 @@ void mul3();
 void porcen();
 void porcen2();
 void iva();
+void div_mod();
+
+int mcd();
+int mcm();
 
 
 void semisuma();
@@ -115,8 +121,10 @@ int main()
     cout <<" 17.Dividir potencias " <<endl;
     cout <<" 18.Potencia de una potencia" <<endl;
     cout <<" 19.Operaciones mas sencillas" <<endl;
-    cout <<" 20.Ver lista de cambios " <<endl;
-    cout <<" 21.Salir" <<endl;
+    cout <<" 20.Hacer mcd" <<endl;
+    cout <<" 21.Hacer mcm" <<endl;
+    cout <<" 22.Salir " <<endl;
+    cout <<" 23.Ver lista de cambios" <<endl;
     cout <<" ===> ";
     cin >> op;
 
@@ -199,11 +207,35 @@ int main()
         }
         break;
         case 20:{
-            changelog();
+            cout <<" Digite el primer numero " <<endl;
+            cout <<" ===> ";
+            cin >> n1;
+            cout <<" Digite el segundo numero: " <<endl;
+            cout <<" ===> ";
+            cin >> n2;
+            result = mcd();
+            cout <<" El mcd es " <<result <<endl;
+
         }
         break;
         case 21:{
+            cout <<" Digite el primer numero " <<endl;
+            cout <<" ===> ";
+            cin >> n1;
+            cout <<" Digite el segundo numero: " <<endl;
+            cout <<" ===> ";
+            cin >> n2;
+            result = mcm();
+            cout <<" El mcm es " <<result <<endl;
+
+        }
+        break;
+        case 22:{
             salida();
+        }
+        break;
+        case 23:{
+            changelog();
         }
         break;
         default:{
@@ -259,12 +291,18 @@ void op_sen()
     cout <<" 5.Calcular un porcentaje" <<endl;
     cout <<" 6.Calcular el porcentaje de una fraccion" <<endl;
     cout <<" 7.Calcular el IVA (21 por ciento)" <<endl;
+    cout <<" 8.Hacer division con modulo (mostrar resto) " <<endl;
     cout <<" ===> ";
     cin >> op_sen1;
     
     if(op_sen1 == 4)
     {
         div();
+        return;
+    }
+    if(op_sen1 == 8)
+    {
+        div_mod();
         return;
     }
 
@@ -441,6 +479,32 @@ void div()
 
     result = n1/n2;
     cout <<" El resultado es " <<result <<endl;
+}
+
+void div_mod()
+{
+    string op_m = "";
+    cout <<" Cual es el primer numero?" <<endl;
+    cout <<" ===> ";
+    cin >> m1;
+
+    cout <<" Cual es el segundo numero?" <<endl;
+    cout <<" ===> ";
+    cin >> m2;
+    
+    result = m1 % m2;
+    cout <<" El resultado es " <<result <<endl;
+    cout <<" Quieres saber cual es resultado de la division? (S/n) ";
+    cin >> op_m;
+    if(op_m == "s" || op_m == "S")
+    {
+        result2 = m1/m2;
+        cout <<" El resultado de la division es " <<result2 <<endl;
+        if(result2 == 0)
+        {
+            cout <<" El resultado de la division es decimal." <<endl;
+        }
+    }
 }
 
 void porcen()
@@ -1142,6 +1206,14 @@ void cr_archivo()
                 archivo <<" Precio con IVA: " <<n1 <<endl;
                 archivo <<" Precio sin IVA: " <<result <<endl;
             }
+            if(op_sen1 == 8)
+            {
+                archivo <<" Primer numero: " <<m1 <<endl;
+                archivo <<" Segundo numero: " <<m2 <<endl;
+                archivo <<" Resultado: " <<result <<endl;
+                archivo <<" Resultado de la division: " <<result2 <<endl;
+                archivo <<" Si pone 0 puede ser que no se haya pedido el resultado" <<endl;
+            }
             switch(op_sen2)
             {
                 case 1:{
@@ -1160,7 +1232,15 @@ void cr_archivo()
         }
         break;
         case 20:{
-            exit(1);
+            archivo <<" Primer numero: " <<n1 <<endl;
+            archivo <<" Segundo numero: " <<n2 <<endl;
+            archivo <<" Maximo Comun Divisor: " <<result <<endl;
+        }
+        break;
+        case 21:{
+            archivo <<" Primer numero: " <<n1 <<endl;
+            archivo <<" Segundo numero: " <<n2 <<endl;
+            archivo <<" Minimo Comun Multiplo: " <<result <<endl;
         }
         break;
         default:{
@@ -1201,4 +1281,25 @@ void changelog()
     cout <<endl;
     system("PAUSE");
     salida();
+}
+
+int mcd()
+{
+    int mcd = 0;
+    int a = max(n1, n2);
+    int b = min(n1, n2);
+    while(b!=0)
+    {
+        mcd = b;
+        b = a%b;
+        a = mcd;
+    }
+    return mcd;
+}
+
+int mcm()
+{
+    int mcm1 = mcd();
+    int mcm2 = (n1*n2)/mcm1;
+    return mcm2;
 }
