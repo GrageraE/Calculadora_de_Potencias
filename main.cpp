@@ -8,12 +8,14 @@
 #include <locale>
 using namespace std;
 
-float fr1 = 0;
-float fr2 = 0;
-float fr3 = 0;
-float fr4 = 0;
-float fr5 = 0;
-float fr6 = 0;
+int fr1 = 0;
+int fr2 = 0;
+int fr3 = 0;
+int fr4 = 0;
+int fr5 = 0;
+int fr6 = 0;
+int fr7 = 0;
+int fr8 = 0;
 
 float n1 = 0;
 float n2 = 0;
@@ -668,31 +670,37 @@ void fraccion_suma()
 {
     cout <<" Cual es el primer numerador?" <<endl;
     cout <<" ===> ";
-    cin >> fr1;
+    cin >> fr3;
 
     cout <<" Cual es el primer denominador?" <<endl;
     cout <<" ===> ";
-    cin >> fr2;
+    cin >> fr1;
 
     cout <<" Cual es el numerador de la segunda fraccion?" <<endl;
     cout <<" ===> ";
-    cin >> fr3;
+    cin >> fr4;
 
     cout <<" Cual es el denominador de la segunda fraccion?" <<endl;
     cout <<" ===> ";
-    cin >> fr4;
+    cin >> fr2;
 
-    if (fr2 != fr4)
+    if (fr2 != fr1)
     {
-        cout <<" De momento no se hacer m.c.m. Intenta elegir otro denominador " <<endl;
-        system("PAUSE");
-        exit(1);
+        n1 = fr1;
+        n2 = fr2;
+        fr5 = mcm(); //Este valor será el común denominador
+        //Numeradores:
+        fr6 = fr5/fr1*fr3; //Numerador numero 1
+        fr7 = fr5/fr2*fr4; //Numerador numero 2
+        result = fr6+fr7; //La suma de los numeradores 
+        cout <<" El resultado es " <<result <<"/" <<fr5 <<endl;
     }
-
-    fr5 = fr1+fr3;
-    fr6 = fr2;
-
-    cout <<" El resutado es " <<fr5 <<"/" <<fr6 <<endl;
+    else
+    {
+        fr5 = fr4+fr3;
+        fr6 = fr2;
+        cout <<" El resutado es " <<fr5 <<"/" <<fr6 <<endl;
+    }
 }
 
 
@@ -700,31 +708,37 @@ void fraccion_resta()
 {
     cout <<" Cual es el primer numerador?" <<endl;
     cout <<" ===> ";
-    cin >> fr1;
+    cin >> fr3;
 
     cout <<" Cual es el primer denominador?" <<endl;
     cout <<" ===> ";
-    cin >> fr2;
+    cin >> fr1;
 
     cout <<" Cual es el numerador de la segunda fraccion?" <<endl;
     cout <<" ===> ";
-    cin >> fr3;
+    cin >> fr4;
 
     cout <<" Cual es el denominador de la segunda fraccion?" <<endl;
     cout <<" ===> ";
-    cin >> fr4;
+    cin >> fr2;
 
     if (fr2 != fr4)
     {
-        cout <<" De momento no se hacer m.c.m. Intenta elegir otro denominador " <<endl;
-        system("PAUSE");
-        exit(1);
+        n1 = fr1;
+        n2 = fr2;
+        fr5 = mcm(); //Este valor será el común denominador
+        //Numeradores:
+        fr6 = fr5/fr1*fr3; //Numerador numero 1
+        fr7 = fr5/fr2*fr4; //Numerador numero 2
+        result = fr6-fr7; //La resta de los numeradores 
+        cout <<" El resultado es " <<result <<"/" <<fr5 <<endl;
     }
-
+    else
+    {
     fr5 = fr1 - fr3;
     fr6 = fr2;
-
     cout <<" El resultado es " <<fr5 <<"/" <<fr6 <<endl;
+    }
 }
 
 
@@ -1060,15 +1074,27 @@ void cr_archivo()
     switch(op)
     {
         case 1:{
-            archivo <<" Primera fraccion ===> " <<fr1 <<"/" <<fr2 <<endl;
-            archivo <<" Segunda fraccion ===> " <<fr3 <<"/" <<fr4 <<endl;
-            archivo <<" Resultado ===> " <<fr5 <<"/" <<fr6 <<endl;
+            archivo <<" Primera fraccion ===> " <<fr3 <<"/" <<fr1 <<endl;
+            archivo <<" Segunda fraccion ===> " <<fr4 <<"/" <<fr2 <<endl;
+            if(fr1 != fr2)
+            {
+                archivo <<" Resultado ===> " <<result <<"/" <<fr5 <<endl;
+            }
+            else{
+                archivo <<" Resultado ===> " <<fr5 <<"/" <<fr6 <<endl;
+            }
         }
         break;
         case 2:{
             archivo <<" Primera fraccion ===> " <<fr1 <<"/" <<fr2 <<endl;
             archivo <<" Segunda fraccion ===> " <<fr3 <<"/" <<fr4 <<endl;
-            archivo <<" Resultado ===> " <<fr5 <<"/" <<fr6 <<endl;
+            if(fr1 != fr2)
+            {
+                archivo <<" Resultado ===> " <<result <<"/" <<fr5 <<endl;
+            }
+            else{
+                archivo <<" Resultado ===> " <<fr5 <<"/" <<fr6 <<endl;
+            }
         }
         break;
         case 3:{
