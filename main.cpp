@@ -2,12 +2,14 @@
 #include <string>
 #include <stdlib.h>
 #include <fstream>
-#include <cmath>
-#include <algorithm>
+#include <cmath>  //Operaciones matematicas
+#include <algorithm>  //Maximo/Minimo
+//Para caracteres espaciales 
 #include <wchar.h>
 #include <locale>
 using namespace std;
 
+//Variables de las fracciones 
 int fr1 = 0;
 int fr2 = 0;
 int fr3 = 0;
@@ -16,7 +18,7 @@ int fr5 = 0;
 int fr6 = 0;
 int fr7 = 0;
 int fr8 = 0;
-
+//Variables que almacenan entradas del usuario
 float n1 = 0;
 float n2 = 0;
 float n3 = 0;
@@ -24,26 +26,34 @@ float result = 0;
 float result2 = 0;
 int m1 = 0;
 int m2 = 0;
-
+//Variables para operaciones con potencias 
 int base1 = 0;
 int exp1 = 0;
 int base2 = 0;
 int exp11 = 0;
 int exp111 = 0;
 
-int factorial = 1;
+int factorial = 1; //Almacena el resultado del factorial (x!)
 
+//Variables otras operaciones:
+double ot1 = 0;
+double ot2 = 0;
+double ot3 = 0;  //Por si se necesitan en vez de 1, 2 inputs
+
+//Variables de seleccion de opciones numericas:
 int op = 0;  
 int op_pot = 0;
 int op_11 = 0;
 int op_sen1 = 0;
 int op_sen2 = 0;
+int op_ot = 0;
 
-string op2 = "";
+string op2 = ""; //Variables que almacenan las opciones del usuario en formato de caracter
 string op_rep = "";
 string op_pot2 = "";
 string op_porcen = "";
 
+//Operaciones con fracciones
 void fraccion();
 
 void fraccion_suma();
@@ -51,19 +61,20 @@ void fraccion_resta();
 void fraccion_mul();
 void fraccion_div();
 
-
+//Operaciones con potencias 
 void op_potencia();
 
 void mul_pot();
 void div_pot();
 void mul_pot_dis();
 void div_pot_dis();
-
+//Potencia de una potencia...
 void potencia_potencia();
 void potencia_potencia_2();
 void potencia_potencia_3();
 void potencia_potencia_result();
 
+//Operaciones sencillas
 void op_sen();
 
 void sumar();
@@ -81,18 +92,28 @@ void div_mod();
 int mcd();
 int mcm();
 
+//Operaciones con arcos
+void ot();
 
-void semisuma();
+void tangente();
+void arco_tan();
+void hipertan();
+void cose();
+void arco_cose();
+void hipercose();
+
+void semisuma();  //(a+b)/2
 void potencia();
 void r_cua();
 void r_cub();
-void inv();
+void inv();  //n-1/n/1
 void base_10();
-void fact();
-void pi_por();
+void fact();  //x!
+void pi_por(); 
 void e_por();
 void pi_el();
 void e_el();
+//Otras operaciones 
 void cr_archivo();
 void salida();
 void changelog();
@@ -125,8 +146,9 @@ int main()
     cout <<" 19.Operaciones mas sencillas" <<endl;
     cout <<" 20.Hacer mcd" <<endl;
     cout <<" 21.Hacer mcm" <<endl;
-    cout <<" 22.Salir " <<endl;
-    cout <<" 23.Ver lista de cambios" <<endl;
+    cout <<" 22.Hacer otras operaciones" <<endl;
+    cout <<" 23.Salir " <<endl;
+    cout <<" 24.Ver lista de cambios" <<endl;
     cout <<" ===> ";
     cin >> op;
 
@@ -233,10 +255,14 @@ int main()
         }
         break;
         case 22:{
-            salida();
+            ot();
         }
         break;
         case 23:{
+            salida();
+        }
+        break;
+        case 24:{
             changelog();
         }
         break;
@@ -1269,6 +1295,26 @@ void cr_archivo()
             archivo <<" Minimo Comun Multiplo: " <<result <<endl;
         }
         break;
+        case 22:{
+            archivo <<" Valor introducido: " <<ot1 <<endl;
+            switch(op_ot)
+            {
+                case 1: archivo <<" La tangente es: " <<ot2 <<endl;
+                break;
+                case 2: archivo <<" La tangente hiperbolica es " <<ot2 <<endl;
+                break;
+                case 3: archivo <<" La arcotangente es " <<ot2 <<endl;
+                break;
+                case 4: archivo <<" El coseno es " <<ot2 <<endl;
+                break;
+                case 5: archivo <<" El coseno hiperbolico es " <<ot2 <<endl;
+                break;
+                case 6: archivo <<" El arcocoseno es " <<ot2 <<endl;
+                break;
+                default: exit(1);
+            }
+        }
+        break;
         default:{
             exit(1);
         }
@@ -1328,4 +1374,110 @@ int mcm()
     int mcm1 = mcd();
     int mcm2 = (n1*n2)/mcm1;
     return mcm2;
+}
+
+void ot()
+{
+    cout <<" 1.Calcular tangente" <<endl;
+    cout <<" 2.Calcular tangente hiperbolica " <<endl;
+    cout <<" 3.Calcular arcotangente" <<endl;
+    cout <<" 4.Calcular coseno" <<endl;
+    cout <<" 5.Calcular coseno hiperbolico" <<endl;
+    cout <<" 6.Calcular arcoseno" <<endl;
+    cout <<" ===> ";
+    cin >> op_ot;
+    switch(op_ot)
+    {
+        case 1:{
+            tangente();
+        }
+        break;
+        case 2:{
+            hipertan();
+        }
+        break;
+        case 3:{
+            arco_tan();
+        }
+        break;
+        case 4:{
+            cose();
+        }
+        break;
+        case 5:{
+            hipercose();
+        }
+        break;
+        case 6:{
+            arco_cose();
+        }
+        break;
+        default:{
+            cout <<" Opcion incorrecta" <<endl;
+            system("PAUSE");
+            exit(1);
+        }
+    }
+    return;
+}
+
+void tangente()
+{
+    cout <<" Cual es el valor?" <<endl;
+    cout <<" ===> ";
+    cin >> ot1;
+
+    ot2 = tan(ot1);
+    cout <<" El resultado de esta operacion es " <<ot2 <<endl;
+}
+
+void arco_tan()
+{
+    cout <<" Cual es el valor?" <<endl;
+    cout <<" ===> ";
+    cin >> ot1;
+
+    ot2 = atan(ot1);
+    cout <<" El resultado de esta operacion es " <<ot2 <<endl;
+
+}
+
+void hipertan()
+{
+    cout <<" Cual es el valor?" <<endl;
+    cout <<" ===> ";
+    cin >> ot1;
+
+    ot2 = tanh(ot1);
+    cout <<" El resultado de esta operacion es " <<ot2 <<endl;
+}
+
+void cose()
+{
+    cout <<" Cual es el valor?" <<endl;
+    cout <<" ===> ";
+    cin >> ot1;
+
+    ot2 = cos(ot1);
+    cout <<" El resultado de esta operacion es " <<ot2 <<endl;
+}
+
+void arco_cose()
+{
+    cout <<" Cual es el valor?" <<endl;
+    cout <<" ===> ";
+    cin >> ot1;
+
+    ot2 = acos(ot1);
+    cout <<" El resultado de esta operacion es " <<ot2 <<endl;
+}
+
+void hipercose()
+{
+    cout <<" Cual es el valor?" <<endl;
+    cout <<" ===> ";
+    cin >> ot1;
+
+    ot2 = cosh(ot1);
+    cout <<" El resultado de esta operacion es " <<ot2 <<endl;
 }
