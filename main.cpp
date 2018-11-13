@@ -39,6 +39,7 @@ int factorial = 1; //Almacena el resultado del factorial (x!)
 double ot1 = 0;
 double ot2 = 0;
 double ot3 = 0;  //Por si se necesitan en vez de 1, 2 inputs
+double ot4 = 0;
 
 //Variables de seleccion de opciones numericas:
 int op = 0;  
@@ -92,7 +93,7 @@ void div_mod();
 int mcd();
 int mcm();
 
-//Operaciones con arcos
+//Operaciones con arcos/Notaciones científicas 
 void ot();
 
 void tangente();
@@ -101,12 +102,14 @@ void hipertan();
 void cose();
 void arco_cose();
 void hipercose();
+void not_mul();
+void not_div();
 
 void semisuma();  //(a+b)/2
 void potencia();
 void r_cua();
 void r_cub();
-void inv();  //n-1/n/1
+void inv();  //n elevado a -1 / 1 entre n
 void base_10();
 void fact();  //x!
 void pi_por(); 
@@ -1296,22 +1299,32 @@ void cr_archivo()
         }
         break;
         case 22:{
-            archivo <<" Valor introducido: " <<ot1 <<endl;
-            switch(op_ot)
+            if(op_ot <= 6 )
             {
-                case 1: archivo <<" La tangente es: " <<ot2 <<endl;
-                break;
-                case 2: archivo <<" La tangente hiperbolica es " <<ot2 <<endl;
-                break;
-                case 3: archivo <<" La arcotangente es " <<ot2 <<endl;
-                break;
-                case 4: archivo <<" El coseno es " <<ot2 <<endl;
-                break;
-                case 5: archivo <<" El coseno hiperbolico es " <<ot2 <<endl;
-                break;
-                case 6: archivo <<" El arcocoseno es " <<ot2 <<endl;
-                break;
-                default: exit(1);
+                archivo <<" Valor introducido: " <<ot1 <<endl;
+                switch(op_ot)
+                {
+                    case 1: archivo <<" La tangente es: " <<ot2 <<endl;
+                    break;
+                    case 2: archivo <<" La tangente hiperbolica es " <<ot2 <<endl;
+                    break;
+                    case 3: archivo <<" La arcotangente es " <<ot2 <<endl;
+                    break;
+                    case 4: archivo <<" El coseno es " <<ot2 <<endl;
+                    break;
+                    case 5: archivo <<" El coseno hiperbolico es " <<ot2 <<endl;
+                    break;
+                    case 6: archivo <<" El arcocoseno es " <<ot2 <<endl;
+                    break;
+                    default: exit(1);
+                }
+            }
+            else{
+                archivo <<" Primer valor: " <<ot1 <<endl;
+                archivo <<" Primer exponente: " <<ot2 <<endl;
+                archivo <<" Segundo valor: " <<ot3 <<endl;
+                archivo <<" Segundo exponente: " <<ot4 <<endl;
+                archivo <<" Resultado: " <<n1 <<" por 10 elevado a " <<n2 <<endl;
             }
         }
         break;
@@ -1384,6 +1397,8 @@ void ot()
     cout <<" 4.Calcular coseno" <<endl;
     cout <<" 5.Calcular coseno hiperbolico" <<endl;
     cout <<" 6.Calcular arcoseno" <<endl;
+    cout <<" 7.Multiplicar dos notaciones cientificas " <<endl;
+    cout <<" 8.Dividir dos notaciones cientificas " <<endl;
     cout <<" ===> ";
     cin >> op_ot;
     switch(op_ot)
@@ -1410,6 +1425,14 @@ void ot()
         break;
         case 6:{
             arco_cose();
+        }
+        break;
+        case 7:{
+            not_mul();
+        }
+        break;
+        case 8:{
+            not_div();
         }
         break;
         default:{
@@ -1480,4 +1503,56 @@ void hipercose()
 
     ot2 = cosh(ot1);
     cout <<" El resultado de esta operacion es " <<ot2 <<endl;
+}
+
+void not_mul()
+{
+    cout <<" Cual es el primer valor? (NO '10 elevado a...' " <<endl;
+    cout <<" ===> ";
+    cin >> ot1;  //Pedimos valores...
+
+    cout <<" Cual es el exponente de 10?" <<endl;
+    cout <<" ===> ";
+    cin >> ot2;
+
+    cout <<" Cual es el segundo valor?" <<endl;
+    cout <<" ===> ";
+    cin >> ot3;
+
+    cout <<" Cual es el segundo exponente de 10?" <<endl;
+    cout <<" ===> ";
+    cin >> ot4;
+
+    n1 = ot1*ot3;
+    n1 = n1/10;  //Obtenemos la primera parte del resultado
+    n2 = ot2+ot4;
+    n2 = n2+1;  //Obtenemos lo que se eleva a 10
+
+    cout <<" El resultado es " <<n1 <<" por 10 elevado a " <<n2 <<endl;
+}
+
+void not_div()
+{
+    cout <<" Cual es el primer valor? (NO '10 elevado a...' " <<endl;
+    cout <<" ===> ";
+    cin >> ot1;  //Pedimos valores...
+
+    cout <<" Cual es el exponente de 10?" <<endl;
+    cout <<" ===> ";
+    cin >> ot2;
+
+    cout <<" Cual es el segundo valor?" <<endl;
+    cout <<" ===> ";
+    cin >> ot3;
+
+    cout <<" Cual es el segundo exponente de 10?" <<endl;
+    cout <<" ===> ";
+    cin >> ot4;
+
+    n1 = ot1/ot3;
+    n1 = n1/10;
+    n2 = ot2-ot4;
+    n2 = n2+1;
+
+    cout <<" El resultado es " <<n1 <<" por 10 elevado a " <<n2 <<endl;
 }
