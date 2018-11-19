@@ -38,7 +38,7 @@ int factorial = 1; //Almacena el resultado del factorial (x!)
 //Variables otras operaciones:
 double ot1 = 0;
 double ot2 = 0;
-double ot3 = 0;  //Por si se necesitan en vez de 1, 2 inputs
+double ot3 = 0;  //Por si se necesitan en vez de 1, 2 inputs y para el elevado a -1
 double ot4 = 0;
 
 //Variables de seleccion de opciones numericas:
@@ -53,6 +53,7 @@ string op2 = ""; //Variables que almacenan las opciones del usuario en formato d
 string op_rep = "";
 string op_pot2 = "";
 string op_porcen = "";
+string op_ot2 = "";
 
 //Operaciones con fracciones
 void fraccion();
@@ -286,6 +287,18 @@ int main()
         }
     }
 
+    if(op_ot <= 6 && ot > 0)
+    {
+        cout <<" Quiere hacer la inversa del resultado? (S/n) ";
+        cin >> op_ot2;
+        if(op_ot2 == "S" || op_ot2 == "s")
+        {
+            ot3 = 1/ot2;
+            cout <<" El resultado elevado a -1 es " <<ot3 <<endl;
+        }
+    }
+
+    //NO se debe de poner más condicionales a partir de aquí...
     cout <<" Quiere guardar los datos en un archivo? (S/n) ";
     cin >> op2;
     if(op2 == "s" | op2 == "S" | op2 == "")
@@ -1317,6 +1330,10 @@ void cr_archivo()
                     case 6: archivo <<" El arcocoseno es " <<ot2 <<endl;
                     break;
                     default: exit(1);
+                }
+                if(op_ot2 == "s" || op_ot2 == "S")
+                {
+                    archivo <<" El resultado elevado a la -1 es " <<ot3 <<endl;
                 }
             }
             else{
