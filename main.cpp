@@ -7,7 +7,7 @@
 //Para caracteres espaciales 
 #include <wchar.h>
 #include <locale>
-using namespace std;
+using namespace std;  //Las palabras magicas con las que funcionan las librerias
 
 //Variables de las fracciones 
 int fr1 = 0;
@@ -48,6 +48,7 @@ int op_11 = 0;
 int op_sen1 = 0;
 int op_sen2 = 0;
 int op_ot = 0;
+int op_ot3 = 0; //Esta es para el "es divisible por..."
 
 string op2 = ""; //Variables que almacenan las opciones del usuario en formato de caracter
 string op_rep = "";
@@ -105,6 +106,15 @@ void arco_cose();
 void hipercose();
 void not_mul();
 void not_div();
+void es_divisor();
+int es_divisor_2();
+int es_divisor_3();
+int es_divisor_4();
+int es_divisor_6();
+int es_divisor_7();
+int es_divisor_8();
+int es_divisor_9();
+int es_divisor_11();
 
 void semisuma();  //(a+b)/2
 void potencia();
@@ -287,7 +297,7 @@ int main()
         }
     }
 
-    if(op_ot <= 6 && ot > 0)
+    if(op_ot <= 6 && op_ot > 0)
     {
         cout <<" Quiere hacer la inversa del resultado? (S/n) ";
         cin >> op_ot2;
@@ -297,14 +307,23 @@ int main()
             cout <<" El resultado elevado a -1 es " <<ot3 <<endl;
         }
     }
-
+    /* Aqui hay un bug */
     //NO se debe de poner más condicionales a partir de aquí...
-    cout <<" Quiere guardar los datos en un archivo? (S/n) ";
-    cin >> op2;
-    if(op2 == "s" | op2 == "S" | op2 == "")
+    do  //Esto es para que algunas funciones no vayan a crear el archivo... 
     {
-        cr_archivo();
+        cout <<" Quiere guardar los datos en un archivo? (S/n) ";
+        cin >> op2;
+        if(op2 == "s" | op2 == "S" | op2 == "")
+        {
+            cr_archivo();
+            break;
+        }
+        else{
+            break;
+        }
     }
+    while(op_ot!=9);
+    /* Se finaliza las instrucciones con bug */
 
     cout <<" Quiere hacer otra operacion mas? (S/n) ";
     cin >> op_rep; 
@@ -1416,6 +1435,7 @@ void ot()
     cout <<" 6.Calcular arcoseno" <<endl;
     cout <<" 7.Multiplicar dos notaciones cientificas " <<endl;
     cout <<" 8.Dividir dos notaciones cientificas " <<endl;
+    cout <<" 9.Saber si un numero es divisible por... " <<endl;
     cout <<" ===> ";
     cin >> op_ot;
     switch(op_ot)
@@ -1450,6 +1470,10 @@ void ot()
         break;
         case 8:{
             not_div();
+        }
+        break;
+        case 9:{
+            es_divisor();
         }
         break;
         default:{
@@ -1572,4 +1596,207 @@ void not_div()
     n2 = n2+1;
 
     cout <<" El resultado es " <<n1 <<" por 10 elevado a " <<n2 <<endl;
+}
+
+void es_divisor()
+{
+    cout <<" Que numero es el que quieres saber si es divisible por?" <<endl;
+    cout <<" ===> ";
+    cin >> m1;
+
+    cout <<" Cual es ese 'por'?" <<endl;
+    cout <<" 1.Por 2" <<endl;
+    cout <<" 2.Por 3" <<endl;
+    cout <<" 3.Por 4" <<endl;
+    cout <<" 4.Por 6" <<endl;
+    cout <<" 5.Por 7" <<endl;
+    cout <<" 6.Por 8" <<endl;
+    cout <<" 7.Por 9" <<endl;
+    cout <<" 8.Por 11" <<endl;
+    cout <<" ===> ";
+    cin >> op_ot3;
+
+    switch(op_ot3)
+    {
+        case 1:{
+            if(es_divisor_2()==1)
+            {
+                cout <<" El numero " <<m1 <<" es divisible por 2" <<endl;
+            }
+            else{
+                cout <<" El numero " <<m1 <<" no es divisible por 2" <<endl;
+            }
+        }
+        break;
+        case 2:{
+            if(es_divisor_3()==1)
+            {
+                cout <<" El numero " <<m1 <<" es divisible por 3" <<endl;
+            }
+            else{
+                cout <<" El numero " <<m1 <<" no es divisible por 3" <<endl;
+            }
+
+        }
+        break;
+        case 3:{
+            if(es_divisor_4()==1)
+            {
+                cout <<" El numero " <<m1 <<" es divisible por 4" <<endl;
+            }
+            else{
+                cout <<" El numero " <<m1 <<" no es divisible por 4" <<endl;
+            }
+
+        }
+        break;
+        case 4:{
+            if(es_divisor_6()==1)
+            {
+                cout <<" El numero " <<m1 <<" es divisible por 6" <<endl;
+            }
+            else{
+                cout <<" El numero " <<m1 <<" no es divisible por 6" <<endl;
+            }
+
+        }
+        break;
+        case 5:{
+            if(es_divisor_7()==1)
+            {
+                cout <<" El numero " <<m1 <<" es divisible por 7" <<endl;
+            }
+            else{
+                cout <<" El numero " <<m1 <<" no es divisible por 7" <<endl;
+            }
+
+        }
+        break;
+        case 6:{
+            if(es_divisor_8()==1)
+            {
+                cout <<" El numero " <<m1 <<" es divisible por 8" <<endl;
+            }
+            else{
+                cout <<" El numero " <<m1 <<" no es divisible por 8" <<endl;
+            }
+
+        }
+        break;
+        case 7:{
+            if(es_divisor_9()==1)
+            {
+                cout <<" El numero " <<m1 <<" es divisible por 9" <<endl;
+            }
+            else{
+                cout <<" El numero " <<m1 <<" no es divisible por 9" <<endl;
+            }
+
+        }
+        break;
+        case 8:{
+            if(es_divisor_11()==1)
+            {
+                cout <<" El numero " <<m1 <<" es divisible por 11" <<endl;
+            }
+            else{
+                cout <<" El numero " <<m1 <<" no es divisible por 11" <<endl;
+            }
+
+        }
+        break;
+        default:{
+            cout <<" Opcion incorrecta " <<endl;
+            system("PAUSE");
+            exit(1);
+        }
+    }
+}
+
+int es_divisor_2()
+{
+    if(m1%2 == 0)
+    {
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+int es_divisor_3()
+{
+    if(m1%3==0)
+    {
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+int es_divisor_4()
+{
+    if(m1%4==0)
+    {
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+int es_divisor_6()
+{
+    if(m1%6==0)
+    {
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+int es_divisor_7()
+{
+    if(m1%7==0)
+    {
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+int es_divisor_8()
+{
+    if(m1%8==0)
+    {
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+int es_divisor_9()
+{
+    if(m1%9==0)
+    {
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+int es_divisor_11()
+{
+    if(m1%11==0)
+    {
+        return 1;
+    }
+    else{
+        return 0;
+    }
 }
