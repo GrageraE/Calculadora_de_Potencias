@@ -128,6 +128,7 @@ void e_por();
 void pi_el();
 void e_el();
 //Otras operaciones 
+void op_ot_9();
 void cr_archivo();
 void salida();
 void changelog();
@@ -307,31 +308,37 @@ int main()
             cout <<" El resultado elevado a -1 es " <<ot3 <<endl;
         }
     }
-    /* Aqui hay un bug */
-    //NO se debe de poner más condicionales a partir de aquí...
-    do  //Esto es para que algunas funciones no vayan a crear el archivo... 
+
+    if(op_ot==9)  //Esto es para que no ejeute lo siguiente si la variable op_ot == 9
     {
+        op_ot_9();  //Mas detalles en la funcion
+    }
+    else
+    {
+        //A partir de aquí no se debe de poner más condicionales...
         cout <<" Quiere guardar los datos en un archivo? (S/n) ";
         cin >> op2;
         if(op2 == "s" | op2 == "S" | op2 == "")
         {
             cr_archivo();
-            break;
-        }
-        else{
-            break;
         }
     }
-    while(op_ot!=9);
-    /* Se finaliza las instrucciones con bug */
 
-    cout <<" Quiere hacer otra operacion mas? (S/n) ";
-    cin >> op_rep; 
-    if(op_rep == "s" || op_rep == "S")
+    if(op_ot==9)
     {
-        cout <<endl;
+        //Aqui no va a hacer NADA
     }
+    else
+    {
+        cout <<" Quiere hacer otra operacion mas? (S/n) ";
+        cin >> op_rep; 
+        if(op_rep == "s" || op_rep == "S")
+        {
+            cout <<endl;
+        }
     }
+
+    }  //Cuidado con esta parte: hay un ciclo do-while, el codigo podría ser "ambiguo"...
     while (op_rep == "s" || op_rep == "S");
 
     system("PAUSE");
@@ -1377,7 +1384,6 @@ void cr_archivo()
     }
     archivo.close();
     cout <<" Archivo creado correctamente" <<endl;
-    system("PAUSE");
 }
 
 
@@ -1798,5 +1804,21 @@ int es_divisor_11()
     }
     else{
         return 0;
+    }
+}
+
+void op_ot_9()
+{
+    cout <<" Quiere hacer otra operacion mas? (S/n) ";
+    cin >> op_rep; 
+    if(op_rep == "s" || op_rep == "S")
+    {
+        cout <<endl;
+        op_rep = "s";
+        return;
+    }
+    else{
+        system("PAUSE");
+        exit(0);
     }
 }
