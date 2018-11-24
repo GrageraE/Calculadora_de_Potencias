@@ -87,8 +87,11 @@ void div();
 void sumar3();
 void restar3();
 void mul3();
-void porcen();
-void porcen2();
+//Operaciones con procentajes:
+void porcen();  //Calcular un porcentaje
+void porcen2();  
+void porcen3();
+void porcen4();
 void iva();
 void div_mod();
 
@@ -362,6 +365,8 @@ void op_sen()
     cout <<" 6.Calcular el porcentaje de una fraccion" <<endl;
     cout <<" 7.Calcular el IVA (21 por ciento)" <<endl;
     cout <<" 8.Hacer division con modulo (mostrar resto) " <<endl;
+    cout <<" 9.Sumar un procentaje" <<endl;
+    cout <<" 10.Restar un porcentaje" <<endl;
     cout <<" ===> ";
     cin >> op_sen1;
     
@@ -384,6 +389,16 @@ void op_sen()
     if(op_sen1 == 6)
     {
         porcen2();
+        return;
+    }
+    if(op_sen1 == 9)
+    {
+        porcen3();
+        return;
+    }
+    if(op_sen1 == 10)
+    {
+        porcen4();
         return;
     }
     if(op_sen1 == 7)
@@ -614,6 +629,36 @@ void porcen2()
 
     result = (n2*100)/n1;
     cout <<" El resultado es el " <<result <<" por ciento de " <<n1 <<endl;
+}
+
+void porcen3()
+{
+    cout <<" Cual es el numero no porcentaje?" <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+    cout <<" Cual es el procentaje que quieres sumar?" <<endl;
+    cout <<" ===> ";
+    cin >> n2; 
+
+    result = (n1*n2)/100;
+    result = n1+result;
+    cout <<" El resultado es " <<result <<endl;
+}
+
+void porcen4()
+{
+    cout <<" Cual es el numero no porcentaje?" <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+    cout <<" Cual es el procentaje que quieres restar?" <<endl;
+    cout <<" ===> ";
+    cin >> n2; 
+
+    result = (n1*n2)/100;
+    result = n1-result;
+    cout <<" El resultado es " <<result <<endl;
 }
 
 void iva()
@@ -1133,7 +1178,8 @@ void cr_archivo()
     cout <<" Cual sera el nombre del archivo?" <<endl;
     cout <<" Se le anadira '.txt' al final" <<endl;
     cout <<" ===> ";
-    cin >> nm;
+    cin.ignore();
+    getline(cin, nm);
     nm = nm + ".txt";
 
     ofstream archivo;
@@ -1307,6 +1353,18 @@ void cr_archivo()
                 archivo <<" Resultado: " <<result <<endl;
                 archivo <<" Resultado de la division: " <<result2 <<endl;
                 archivo <<" Si pone 0 puede ser que no se haya pedido el resultado" <<endl;
+            }
+            if(op_sen1 == 9)
+            {
+                archivo <<" Primer numero: " <<n1 <<endl;
+                archivo <<" Porcentaje que se suma: " <<n2 <<endl;
+                archivo <<" Resultado: " <<result <<endl;
+            }
+            if(op_sen1 == 10)
+            {
+                archivo <<" Primer numero: " <<n1 <<endl;
+                archivo <<" Porcentaje que se va a restar: " <<n2 <<endl;
+                archivo <<" Resultado: " <<result <<endl;
             }
             switch(op_sen2)
             {
