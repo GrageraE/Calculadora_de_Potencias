@@ -95,8 +95,8 @@ void porcen4();
 void iva();
 void div_mod();
 
-int mcd();
-int mcm();
+int mcd();  //Maximo comun divisor
+int mcm();  //Minimo comun multiplo
 
 //Operaciones con arcos/Notaciones científicas 
 void ot();
@@ -123,13 +123,35 @@ void semisuma();  //(a+b)/2
 void potencia();
 void r_cua();
 void r_cub();
-void inv();  //n elevado a -1 / 1 entre n
+void inv();  //n elevado a -1 / 1 partido de  n
 void base_10();
 void fact();  //x!
 void pi_por(); 
 void e_por();
 void pi_el();
 void e_el();
+
+//Monomios:
+void menuMonomios();
+int opMonomio = 0;
+void sumaMonomios();
+void restarMonomios();
+void multiplicarMonomios();
+void dividirMonomios();
+void potenciaMonomios();
+//Variables monomios:
+float ce1 = 0;  //Primer monomio
+int pl1 = 0;
+float ce2 = 0;  //Segundo monomio
+int pl2 = 0;
+float ce3 = 0;  //Tercer monomio
+int pl3 = 0;
+/*
+    Ce ===> Coeficiente (numeros, pueden ser flotantes)
+    Pl ===> Parte literal (letras, en este caso, exponentes de dichas letras [lo almacenan])
+    //End
+*/
+
 //Otras operaciones 
 void op_ot_9();
 void cr_archivo();
@@ -165,8 +187,9 @@ int main()
     cout <<" 20.Hacer mcd" <<endl;
     cout <<" 21.Hacer mcm" <<endl;
     cout <<" 22.Hacer otras operaciones" <<endl;
-    cout <<" 23.Salir " <<endl;
-    cout <<" 24.Ver lista de cambios" <<endl;
+    cout <<" 23.Hacer operaciones con monomios (y polinomios)" <<endl;
+    cout <<" 24.Salir " <<endl;
+    cout <<" 25.Ver lista de cambios" <<endl;
     cout <<" ===> ";
     cin >> op;
 
@@ -277,10 +300,14 @@ int main()
         }
         break;
         case 23:{
-            salida();
+            menuMonomios();
         }
         break;
         case 24:{
+            salida();
+        }
+        break;
+        case 25:{
             changelog();
         }
         break;
@@ -1429,6 +1456,59 @@ void cr_archivo()
             }
         }
         break;
+        case 23:{
+            switch(opMonomio)
+            {
+                case 1:{
+                    archivo <<" Primer monomio: Coeficiente: " <<ce1 <<endl;
+                    archivo <<" Parte literal: " <<pl1 <<endl;
+                    archivo <<" Segundo monomio: Coeficiente: " <<ce2 <<endl;
+                    archivo <<" Parte literal: " <<pl2 <<endl;
+                    archivo <<" Tercer monomio: Coeficiente: " <<ce3 <<endl;
+                    archivo <<" Parte literal: " <<pl3 <<endl;
+                    archivo <<" Resultado: " <<ce1+ce2+ce3 <<"x" <<pl1 <<endl;
+                }
+                break;
+                case 2:{
+                    archivo <<" Primer monomio: Coeficiente: " <<ce1 <<endl;
+                    archivo <<" Parte literal: " <<pl1 <<endl;
+                    archivo <<" Segundo monomio: Coeficiente: " <<ce2 <<endl;
+                    archivo <<" Parte literal: " <<pl2 <<endl;
+                    archivo <<" Tercer monomio: Coeficiente: " <<ce3 <<endl;
+                    archivo <<" Parte literal: " <<pl3 <<endl;
+                    archivo <<" Resultado: " <<ce1-ce2-ce3 <<"x" <<pl1 <<endl;
+                }
+                break;
+                case 3:{
+                    archivo <<" Primer monomio: Coeficiente: " <<ce1 <<endl;
+                    archivo <<" Parte literal: " <<pl1 <<endl;
+                    archivo <<" Segundo monomio: Coeficiente: " <<ce2 <<endl;
+                    archivo <<" Parte literal: " <<pl2 <<endl;
+                    archivo <<" Tercer monomio: Coeficiente: " <<ce3 <<endl;
+                    archivo <<" Parte literal: " <<pl3 <<endl;
+                    archivo <<" Resultado: " <<ce1*ce2*ce3 <<"x" <<pl1+pl2+pl3 <<endl;
+                }
+                break;
+                case 4:{
+                    archivo <<" Primer monomio: Coeficiente: " <<ce1 <<endl;
+                    archivo <<" Parte literal: " <<pl1 <<endl;
+                    archivo <<" Segundo monomio: Coeficiente: " <<ce2 <<endl;
+                    archivo <<" Parte literal: " <<pl2 <<endl;
+                    archivo <<" Tercer monomio: Coeficiente: " <<ce3 <<endl;
+                    archivo <<" Parte literal: " <<pl3 <<endl;
+                    archivo <<" Resultado: " <<ce1/ce2/ce3 <<"x" <<pl1-pl2-pl3 <<endl;
+                }
+                break;
+                case 5:{
+                    archivo <<" Coeficiente: " <<ce1 <<endl;
+                    archivo <<" Parte literal: " <<pl1 <<endl;
+                    archivo <<" Resultado: " <<pow(pow(ce1,n1),n2) <<"x" <<pl1*n1*n2 <<endl;
+                }
+                break;
+                default: exit(1);
+            }
+        }
+        break;
         default:{
             exit(1);
         }
@@ -1879,4 +1959,183 @@ void op_ot_9()
         system("PAUSE");
         exit(0);
     }
+}
+
+
+//Monomios:
+
+void menuMonomios()
+{
+    cout <<" Elige una opcion: " <<endl;
+    cout <<" 1.Sumar monomios" <<endl;
+    cout <<" 2.Restar monomios" <<endl;
+    cout <<" 3.Multiplicar monomios" <<endl;
+    cout <<" 4.Dividir monomios" <<endl;
+    cout <<" 5.Elevar monomios (solo un monomio)" <<endl;
+    cout <<" ===> ";
+    cin >> opMonomio;
+    switch(opMonomio)
+    {
+        case 1:{
+            sumaMonomios();
+        }
+        break;
+        case 2:{
+            restarMonomios();
+        }
+        break;
+        case 3:{
+            multiplicarMonomios();
+        }
+        break;
+        case 4:{
+            dividirMonomios();
+        }
+        break;
+        case 5:{
+            potenciaMonomios();
+        }
+        break;
+        default:{
+            cout <<" Opcion no soportada/incorrecta. El proceso se detendra" <<endl;
+            cout <<" ";
+            system("PAUSE");
+            exit(1);
+        }
+    }
+
+}
+
+void sumaMonomios()
+{
+    cout <<" Cual es la parte literal comun?" <<endl;
+    cout <<" ===> ";
+    cin >> pl1;
+
+    cout <<" Cual es el primer coeficiente literal?" <<endl;
+    cout <<" ===> ";
+    cin >> ce1;
+
+    cout <<" Cual es el segundo coeficiente literal?" <<endl;
+    cout <<" ===> ";
+    cin >> ce2;
+
+    //Opcional para el usuario:
+    cout <<" Cual es el tercer coeficiente literal?" <<endl;
+    cout <<" Pon 0 si no hay un tercer monomio" <<endl;
+    cout <<" ===> ";
+    cin >> ce3;
+
+    cout <<" La suma de " <<ce1 <<"x" <<pl1 <<" + " <<ce2 <<"x" <<pl1 <<" + " <<ce3 <<"x" <<pl1;
+    cout <<" es " <<ce1+ce2+ce3 <<"x" <<pl1 <<endl;
+}
+
+void restarMonomios()
+{
+    cout <<" Cual es la parte literal comun?" <<endl;
+    cout <<" ===> ";
+    cin >> pl1;
+
+    cout <<" Cual es el primer coeficiente literal?" <<endl;
+    cout <<" ===> ";
+    cin >> ce1;
+
+    cout <<" Cual es el segundo coeficiente literal?" <<endl;
+    cout <<" ===> ";
+    cin >> ce2;
+
+    //Opcional para el usuario:
+    cout <<" Cual es el tercer coeficiente literal?" <<endl;
+    cout <<" Pon 0 si no hay un tercer monomio" <<endl;
+    cout <<" ===> ";
+    cin >> ce3;
+
+    cout <<" La resta de " <<ce1 <<"x" <<pl1 <<" - " <<ce2 <<"x" <<pl1 <<" - " <<ce3 <<"x" <<pl1;
+    cout <<" es " <<ce1-ce2-ce3 <<"x" <<pl1 <<endl;
+}
+
+void multiplicarMonomios()
+{
+    cout <<" Cual es la parte literal comun?" <<endl;
+    cout <<" ===> ";
+    cin >> pl1;
+
+    cout <<" Cual es el primer coeficiente literal?" <<endl;
+    cout <<" ===> ";
+    cin >> ce1;
+
+    cout <<" Cual es la segunda parte literal?" <<endl;
+    cout <<" ===> ";
+    cin >> pl2;
+
+    cout <<" Cual es el segundo coeficiente literal?" <<endl;
+    cout <<" ===> ";
+    cin >> ce2;
+
+    //Opcional para el usuario:
+    cout <<" Cual es la tercera parte literal?" <<endl;
+    cout <<" Pon 0 si no hay un tercer monomio" <<endl;
+    cout <<" ===> ";
+    cin >> pl3;
+
+    cout <<" Cual es el tercer coeficiente literal?" <<endl;
+    cout <<" Pon 1 si no hay un tercer monomio" <<endl;
+    cout <<" ===> ";
+    cin >> ce3;
+
+    cout <<" El resultado es " <<ce1*ce2*ce3 <<"x" <<pl1+pl2+pl3 <<endl;
+}
+
+void dividirMonomios()
+{
+    cout <<" Cual es la parte literal comun?" <<endl;
+    cout <<" ===> ";
+    cin >> pl1;
+
+    cout <<" Cual es el primer coeficiente literal?" <<endl;
+    cout <<" ===> ";
+    cin >> ce1;
+
+    cout <<" Cual es la segunda parte literal?" <<endl;
+    cout <<" ===> ";
+    cin >> pl2;
+
+    cout <<" Cual es el segundo coeficiente literal?" <<endl;
+    cout <<" ===> ";
+    cin >> ce2;
+
+    //Opcional para el usuario:
+    cout <<" Cual es la tercera parte literal?" <<endl;
+    cout <<" Pon 0 si no hay un tercer monomio" <<endl;
+    cout <<" ===> ";
+    cin >> pl3;
+
+    cout <<" Cual es el tercer coeficiente literal?" <<endl;
+    cout <<" Pon 1 si no hay un tercer monomio" <<endl;
+    cout <<" ===> ";
+    cin >> ce3;
+
+    cout <<" El resultado es " <<ce1/ce2/ce3 <<"x" <<pl1-pl2-pl3 <<endl;
+}
+
+void potenciaMonomios()
+{
+    cout <<" Cual es el coeficiente del monomio?" <<endl;
+    cout <<" ===> ";
+    cin >> ce1;
+
+    cout <<" Cual es la parte literal del monomio?" <<endl;
+    cout <<" ===> ";
+    cin >> pl1;
+
+    cout <<" En que esta elevado todo ese monomio?" <<endl;
+    cout <<" ===> ";
+    cin >> n1;
+
+    cout <<" Y todo eso, en que esta elevado?" <<endl;
+    cout <<" Pon 1 si no existe ese parentesis" <<endl;
+    cout <<" ===> ";
+    cin >> n2;
+
+    cout <<" El resultado es " <<pow(pow(ce1,n1),n2) <<"x" <<pl1*n1*n2 <<endl;
 }
